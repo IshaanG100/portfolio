@@ -17,22 +17,22 @@ export const photos: Photo[] = [
   },
   {
     src: '/photos/photo-3.jpeg',
-    caption: 'UBC at its finest',
+    caption: 'UBC at its Finest',
     alt: 'UBC Garden',
   },
   {
     src: '/photos/photo-4.JPG',
-    caption: 'Such a wonderful class',
+    caption: 'Great end to Comm 294',
     alt: 'Comm 294',
   },
   {
     src: '/photos/photo-5.jpg',
-    caption: 'PMC Club dinner',
+    caption: 'PMC Club Dinner',
     alt: 'My fav club',
   },
   {
     src: '/photos/photo-6.jpg',
-    caption: 'Grouse Hike',
+    caption: 'Grouse Grind',
     alt: 'BUCS Friends',
   },
 ]
