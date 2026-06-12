@@ -22,7 +22,7 @@ export const photos: Photo[] = [
   },
   {
     src: '/photos/photo-4.JPG',
-    caption: 'Great end to Comm 294',
+    caption: 'Great End to Comm 294',
     alt: 'Comm 294',
   },
   {
