@@ -43,6 +43,13 @@ const config: Config = {
       boxShadow: {
         card: '0 1px 2px rgba(17, 18, 20, 0.04), 0 6px 20px rgba(17, 18, 20, 0.06)',
       },
+      gridTemplateRows: {
+        collapse: '0fr',
+        expand: '1fr',
+      },
+      transitionProperty: {
+        rows: 'grid-template-rows',
+      },
       keyframes: {
         caret: {
           '0%, 100%': { opacity: '1' },

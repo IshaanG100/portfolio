@@ -1,42 +1,56 @@
 import { Experience } from '@/data/experience'
-import Reveal from './Reveal'
 
 interface Props {
   exp: Experience
-  index: number
-  /** Full-width highlight treatment for the current role */
-  wide?: boolean
+  /** Newest role: gets the summit flag */
+  summit?: boolean
 }
 
-export default function ExperienceCard({ exp, index, wide = false }: Props) {
+export default function ExperienceCard({ exp, summit = false }: Props) {
   return (
-    <Reveal delay={index * 60} className={`h-full ${wide ? 'sm:col-span-2' : ''}`}>
-      <article
-        className={`flex h-full flex-col rounded-xl border bg-surface p-6 shadow-card transition-colors ${
-          wide ? 'border-accent-weak' : 'border-border hover:border-accent-weak'
-        }`}
-      >
-        <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-          <div>
-            <h3 className="text-h3 font-semibold text-fg">{exp.role}</h3>
-            <p className="mt-0.5 text-sm font-medium text-fg">{exp.company}</p>
-          </div>
-          <div className="shrink-0 text-xs text-muted sm:text-right">
-            <p>{exp.period}</p>
-            <p>{exp.location}</p>
-          </div>
-        </div>
+    <article
+      className={`relative flex flex-col gap-4 rounded-xl border bg-surface p-5 shadow-card transition-colors sm:flex-row sm:items-start sm:gap-8 sm:p-6 ${
+        exp.current ? 'border-accent-weak' : 'border-border hover:border-accent-weak'
+      }`}
+    >
+      {summit && (
+        <span className="absolute -top-3 left-5 inline-flex items-center gap-1.5 rounded-full border border-accent-weak bg-surface px-2.5 py-0.5 text-xs font-semibold text-accent-link">
+          <FlagIcon />
+          Now
+        </span>
+      )}
 
-        <ul className="mt-4 flex-1 space-y-2">
+      {/* Left column: role, employer, dates */}
+      <div className="sm:w-60 sm:shrink-0">
+        <h3 className={`text-h3 font-semibold ${exp.current ? 'text-accent-link' : 'text-fg'}`}>
+          {exp.role}
+        </h3>
+        <p className="mt-0.5 text-sm font-medium text-fg">{exp.company}</p>
+        <p className="mt-1.5 text-xs text-muted">{exp.period}</p>
+        <p className="text-xs text-muted">{exp.location}</p>
+        {exp.current && !summit && (
+          <span className="mt-2 inline-block text-xs font-semibold uppercase tracking-wide text-accent-link">
+            Current
+          </span>
+        )}
+      </div>
+
+      {/* Right column: what happened there */}
+      <div className="flex-1">
+        <ul className="space-y-2">
           {exp.description.map((point, i) => (
             <li key={i} className="flex gap-3 text-sm leading-relaxed text-muted">
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-link" aria-hidden="true" />
+              <span
+                className={`mt-2 h-1 w-1 shrink-0 rounded-full ${
+                  exp.current ? 'bg-accent' : 'bg-accent-link'
+                }`}
+                aria-hidden="true"
+              />
               {point}
             </li>
           ))}
         </ul>
-
-        <div className="mt-5 flex flex-wrap items-center gap-2">
+        <div className="mt-4 flex flex-wrap gap-2">
           {exp.tags.map((tag) => (
             <span
               key={tag}
@@ -45,13 +59,21 @@ export default function ExperienceCard({ exp, index, wide = false }: Props) {
               {tag}
             </span>
           ))}
-          {exp.current && (
-            <span className="text-xs font-semibold uppercase tracking-wide text-accent-link">
-              Current
-            </span>
-          )}
         </div>
-      </article>
-    </Reveal>
+      </div>
+    </article>
+  )
+}
+
+function FlagIcon() {
+  return (
+    <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M5 21V4m0 0h11l-2.5 3.5L16 11H5"
+      />
+    </svg>
   )
 }

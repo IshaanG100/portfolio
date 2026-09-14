@@ -9,7 +9,13 @@ export default function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
           <Reveal immediate>
             <p className="text-eyebrow font-semibold uppercase text-accent-link">
-              <Typewriter text="Product-minded, between business and engineering" />
+              <Typewriter
+                phrases={[
+                  'Product-minded, between business and engineering',
+                  'Turning business problems into shipped product',
+                  'CS and Commerce at UBC Sauder',
+                ]}
+              />
             </p>
             <h1 className="mt-5 font-display text-display font-medium text-fg">
               Ishaan Singh Gill

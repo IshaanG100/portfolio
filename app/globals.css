@@ -54,6 +54,17 @@
   }
 }
 
+/* Experience ascent: staircase offsets apply from sm upward, flat on mobile */
+.exp-step {
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .exp-step {
+    margin-left: var(--indent);
+    width: var(--width);
+  }
+}
+
 /* Scroll-reveal: disabled entirely for reduced-motion (content just shows) */
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
