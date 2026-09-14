@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Sora } from 'next/font/google'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
@@ -8,20 +8,20 @@ const inter = Inter({
   display: 'swap',
 })
 
-const sora = Sora({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-sora',
+  variable: '--font-display',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: 'Ishaan Singh Gill',
+  title: 'Ishaan Singh Gill · Product-Minded BUCS Student at UBC',
   description:
-    'Portfolio of Ishaan Singh Gill, Commerce & Computer Science student at UBC Sauder, building at the intersection of tech and business.',
+    'Ishaan Singh Gill: Computer Science and Commerce at UBC Sauder, aiming for product management.',
   metadataBase: new URL('https://ishaangill.com'),
   openGraph: {
-    title: 'Ishaan Singh Gill',
-    description: 'Commerce & Computer Science at UBC Sauder',
+    title: 'Ishaan Singh Gill · Product-Minded BUCS Student at UBC',
+    description: 'Computer Science and Commerce at UBC Sauder, aiming for product management.',
     url: 'https://ishaangill.com',
     siteName: 'Ishaan Singh Gill',
     locale: 'en_CA',
@@ -29,9 +29,15 @@ export const metadata: Metadata = {
   },
 }
 
+// Sets the theme class before paint to avoid a flash. Defaults to light.
+const themeScript = `(function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.classList.add('dark')}}catch(e){}})()`
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${sora.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   )

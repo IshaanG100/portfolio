@@ -10,6 +10,18 @@ export interface Experience {
 
 export const experience: Experience[] = [
   {
+    company: 'Kensington Tours (Range Group)',
+    role: 'Financial Intern',
+    period: 'Sep 2026 – Present',
+    location: 'Toronto, ON (hybrid)',
+    description: [
+      'Supporting an enterprise ERP replacement going live in 2027 by executing test scripts, isolating defects and documenting process steps',
+      'Reconciling financial data between the legacy system and its replacement, tracing variances to the point of entry',
+    ],
+    tags: ['ERP', 'Financial Reconciliation', 'Testing'],
+    current: true,
+  },
+  {
     company: 'University of British Columbia',
     role: 'Teaching Assistant, COMM 394',
     period: 'May 2026 – Present',

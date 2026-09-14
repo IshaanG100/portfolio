@@ -1,59 +1,36 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
 import { skills, skillCategories } from '@/data/skills'
 import SkillBadge from './SkillBadge'
+import Reveal from './Reveal'
+import SectionHeading from './SectionHeading'
 
 export default function Skills() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
   return (
-    <section id="skills" className="py-16 px-6 bg-[#0F172A]/50">
-      <div className="max-w-7xl mx-auto" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="font-heading text-4xl font-bold text-[#F8FAFC] mb-12 flex items-center gap-6">
-            Skills
-            <span className="flex-1 h-px bg-gradient-to-r from-[#1E293B] to-transparent" />
-          </h2>
+    <section id="skills" className="border-t border-border bg-surface px-6 py-20 sm:py-28">
+      <div className="mx-auto max-w-content">
+        <SectionHeading kicker="What I work with" title="Skills" />
 
-          <div className="space-y-8">
-            {skillCategories.map((cat, catIndex) => {
-              const catSkills = skills.filter((s) => s.category === cat)
-              if (!catSkills.length) return null
-              return (
-                <motion.div
-                  key={cat}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: catIndex * 0.1 }}
-                >
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-[#94A3B8] mb-4 font-heading">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {skillCategories.map((cat, catIndex) => {
+            const catSkills = skills.filter((s) => s.category === cat)
+            if (!catSkills.length) return null
+            return (
+              <Reveal key={cat} delay={catIndex * 60} className="h-full">
+                <div className="h-full rounded-xl border border-border bg-surface p-6 shadow-card">
+                  <h3 className="text-eyebrow font-semibold uppercase tracking-wider text-muted">
                     {cat}
                   </h3>
-                  <div className="flex flex-wrap gap-3">
-                    {catSkills.map((skill, skillIndex) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 0.3, delay: catIndex * 0.1 + skillIndex * 0.02 }}
-                      >
-                        <SkillBadge name={skill.name} category={skill.category} />
-                      </motion.div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {catSkills.map((skill, i) => (
+                      <Reveal key={skill.name} delay={i * 30}>
+                        <SkillBadge name={skill.name} />
+                      </Reveal>
                     ))}
                   </div>
-                </motion.div>
-              )
-            })}
-          </div>
-        </motion.div>
+                </div>
+              </Reveal>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

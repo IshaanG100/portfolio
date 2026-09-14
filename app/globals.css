@@ -2,47 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
-
 @layer base {
+  :root {
+    /* Light mode (primary) — evergreen accent on soft cool gray */
+    --bg: #f3f4f6; /* soft cool gray page */
+    --surface: #ffffff; /* white cards, lifted off the page */
+    --surface-alt: #edeef1; /* chips / subtle bands */
+    --text: #18191a; /* 16.00:1 on bg */
+    --muted: #6a6c6b; /* 4.81:1 on bg */
+    --border: #e2e4e7;
+    --accent: #1f6b4c; /* CTA fill — white label 6.43:1 */
+    --accent-hover: #166534; /* CTA hover — white label 7.13:1 */
+    --accent-link: #1f6b4c; /* links / kickers / small accent text — 5.84:1 on bg, 6.43:1 on white */
+    --accent-weak: #bfd8c9; /* subtle accent borders / rules */
+  }
+
+  .dark {
+    /* Dark mode — verified against the dark ground */
+    --bg: #141615;
+    --surface: #1c1f1d;
+    --surface-alt: #22251f;
+    --text: #ededeb; /* 15.51:1 on bg, 14.18:1 on surface */
+    --muted: #9b9e9b; /* 6.71:1 on bg, 6.14:1 on surface */
+    --border: #2e322e;
+    --accent: #1e7a54; /* CTA fill — white label 5.29:1 */
+    --accent-hover: #1b6e4a; /* CTA hover (darker) — white label 6.22:1 */
+    --accent-link: #5fb58a; /* links / labels — 7.33:1 bg, 6.70:1 surface */
+    --accent-weak: #2f5a42; /* subtle accent borders */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-[#0A0F1E] text-[#F8FAFC] antialiased;
+    background-color: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    @apply bg-[#3B82F6]/30 text-white;
+    background: var(--accent);
+    color: #fff;
   }
 
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-[#0A0F1E];
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-[#1E293B] rounded-full hover:bg-[#3B82F6]/50;
+  :focus-visible {
+    outline: 2px solid var(--accent-link);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes glow-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
+/* Scroll-reveal: disabled entirely for reduced-motion (content just shows) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }

@@ -1,45 +1,62 @@
-export type SkillCategory = 'Languages' | 'Tools & Platforms' | 'Frameworks & Libraries' | 'Other'
+export type SkillCategory =
+  | 'Product & Research'
+  | 'Data & Analysis'
+  | 'Engineering'
+  | 'Platforms & Tools'
 
 export interface Skill {
   name: string
   category: SkillCategory
 }
 
+// Ordered product-first: the first thing a PM recruiter scans should be
+// product and research practice, with engineering as the supporting cast.
 export const skills: Skill[] = [
-  { name: 'Python', category: 'Languages' },
-  { name: 'JavaScript', category: 'Languages' },
-  { name: 'TypeScript', category: 'Languages' },
-  { name: 'Java', category: 'Languages' },
-  { name: 'C', category: 'Languages' },
-  { name: 'C++', category: 'Languages' },
-  { name: 'SQL', category: 'Languages' },
-  { name: 'R', category: 'Languages' },
+  { name: 'Roadmapping & prioritization', category: 'Product & Research' },
+  { name: 'Agile / Scrum', category: 'Product & Research' },
+  { name: 'A/B testing', category: 'Product & Research' },
+  { name: 'User interviews', category: 'Product & Research' },
+  { name: 'Figma', category: 'Product & Research' },
+  { name: 'Jira', category: 'Product & Research' },
+  { name: 'Notion', category: 'Product & Research' },
 
-  { name: 'Power BI', category: 'Tools & Platforms' },
-  { name: 'Tableau', category: 'Tools & Platforms' },
-  { name: 'Git', category: 'Tools & Platforms' },
-  { name: 'Azure', category: 'Tools & Platforms' },
-  { name: 'AWS', category: 'Tools & Platforms' },
-  { name: 'GCP', category: 'Tools & Platforms' },
-  { name: 'Figma', category: 'Tools & Platforms' },
+  { name: 'SQL', category: 'Data & Analysis' },
+  { name: 'Excel', category: 'Data & Analysis' },
+  { name: 'Power BI', category: 'Data & Analysis' },
+  { name: 'Tableau', category: 'Data & Analysis' },
+  { name: 'Jupyter / Colab', category: 'Data & Analysis' },
+  { name: 'pandas', category: 'Data & Analysis' },
+  { name: 'scikit-learn', category: 'Data & Analysis' },
+  { name: 'R', category: 'Data & Analysis' },
+  { name: 'Financial modeling (DCF)', category: 'Data & Analysis' },
 
-  { name: 'React.js', category: 'Frameworks & Libraries' },
-  { name: 'Next.js', category: 'Frameworks & Libraries' },
-  { name: 'Node.js', category: 'Frameworks & Libraries' },
-  { name: 'Flask', category: 'Frameworks & Libraries' },
-  { name: 'pandas', category: 'Frameworks & Libraries' },
-  { name: 'scikit-learn', category: 'Frameworks & Libraries' },
-  { name: 'Tailwind CSS', category: 'Frameworks & Libraries' },
+  { name: 'Python', category: 'Engineering' },
+  { name: 'JavaScript', category: 'Engineering' },
+  { name: 'TypeScript', category: 'Engineering' },
+  { name: 'Java', category: 'Engineering' },
+  { name: 'C', category: 'Engineering' },
+  { name: 'C++', category: 'Engineering' },
+  { name: 'React.js', category: 'Engineering' },
+  { name: 'Next.js', category: 'Engineering' },
+  { name: 'Node.js', category: 'Engineering' },
+  { name: 'Flask', category: 'Engineering' },
+  { name: 'Tailwind CSS', category: 'Engineering' },
+  { name: 'REST APIs', category: 'Engineering' },
+  { name: 'Postman', category: 'Engineering' },
 
-  { name: 'Excel', category: 'Other' },
-  { name: 'QuickBooks', category: 'Other' },
-  { name: 'SmartSheet', category: 'Other' },
-  { name: 'Trello', category: 'Other' },
+  { name: 'Git', category: 'Platforms & Tools' },
+  { name: 'GitHub Actions / CI', category: 'Platforms & Tools' },
+  { name: 'Azure', category: 'Platforms & Tools' },
+  { name: 'AWS', category: 'Platforms & Tools' },
+  { name: 'GCP', category: 'Platforms & Tools' },
+  { name: 'QuickBooks', category: 'Platforms & Tools' },
+  { name: 'SmartSheet', category: 'Platforms & Tools' },
+  { name: 'Trello', category: 'Platforms & Tools' },
 ]
 
 export const skillCategories: SkillCategory[] = [
-  'Languages',
-  'Tools & Platforms',
-  'Frameworks & Libraries',
-  'Other',
+  'Product & Research',
+  'Data & Analysis',
+  'Engineering',
+  'Platforms & Tools',
 ]
