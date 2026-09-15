@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { photos, Photo } from '@/data/photos'
-import Reveal from './Reveal'
-import SectionHeading from './SectionHeading'
+import Section from './Section'
 
 export default function PhotoGallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
@@ -29,18 +28,14 @@ export default function PhotoGallery() {
   }, [lightboxIndex])
 
   return (
-    <section id="photos" className="border-t border-border px-6 py-20 sm:py-28">
-      <div className="mx-auto max-w-content">
-        <SectionHeading kicker="Outside work" title="Photos" />
-
-        <div className="mt-12 gap-4 sm:columns-2 lg:columns-3">
-          {photos.map((photo, i) => (
-            <Reveal key={i} delay={(i % 3) * 80} className="break-inside-avoid">
-              <PhotoCard photo={photo} onClick={() => setLightboxIndex(i)} />
-            </Reveal>
-          ))}
-        </div>
-      </div>
+    <Section id="photos" title="Photos" kicker="Outside work">
+      <ul className="grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-6 lg:grid-cols-3">
+        {photos.map((photo, i) => (
+          <li key={photo.src}>
+            <PhotoThumb photo={photo} onClick={() => setLightboxIndex(i)} />
+          </li>
+        ))}
+      </ul>
 
       {lightboxIndex !== null && (
         <Lightbox
@@ -56,32 +51,27 @@ export default function PhotoGallery() {
           }
         />
       )}
-    </section>
+    </Section>
   )
 }
 
-function PhotoCard({ photo, onClick }: { photo: Photo; onClick: () => void }) {
+function PhotoThumb({ photo, onClick }: { photo: Photo; onClick: () => void }) {
   return (
-    <button
-      className="group mb-4 block w-full break-inside-avoid overflow-hidden rounded-xl border border-border transition-colors hover:border-accent-weak focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-link"
-      onClick={onClick}
-      aria-label={`View ${photo.alt}`}
-    >
-      <span className="relative block">
+    <button type="button" className="group block w-full text-left" onClick={onClick} aria-label={`View ${photo.alt}`}>
+      <span className="relative block aspect-[4/3] w-full overflow-hidden bg-rule">
         <Image
           src={photo.src}
           alt={photo.alt}
-          width={800}
-          height={600}
-          className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 50vw"
         />
-        {photo.caption && (
-          <span className="absolute inset-x-0 bottom-0 flex items-end bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <span className="text-left text-sm font-medium text-white">{photo.caption}</span>
-          </span>
-        )}
       </span>
+      {photo.caption && (
+        <span className="ui mt-2 block text-meta text-muted transition-colors group-hover:text-ink">
+          {photo.caption}
+        </span>
+      )}
     </button>
   )
 }
@@ -103,60 +93,64 @@ function Lightbox({
 }) {
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-sm"
+      className="ui fixed inset-0 z-[200] flex items-center justify-center bg-ink/95 text-paper"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
+      aria-label={photo.caption || photo.alt}
     >
       <button
-        className="absolute right-5 top-5 z-10 rounded-lg border border-white/20 p-2.5 text-white transition-colors hover:border-white/60"
+        type="button"
+        className="absolute right-4 top-4 z-10 inline-flex h-11 w-11 items-center justify-center text-paper/80 transition-colors hover:text-paper"
         onClick={onClose}
         aria-label="Close"
       >
-        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
 
-      <span className="absolute left-5 top-6 z-10 text-sm font-medium tabular-nums text-white/70">
-        {index + 1} / {total}
+      <span className="absolute left-5 top-5 z-10 text-meta tabular-nums text-paper/70">
+        {index + 1} of {total}
       </span>
 
       {onPrev && (
         <button
-          className="absolute left-4 z-10 rounded-lg border border-white/20 p-3 text-white transition-colors hover:border-white/60"
+          type="button"
+          className="absolute left-2 z-10 inline-flex h-11 w-11 items-center justify-center text-paper/80 transition-colors hover:text-paper sm:left-4"
           onClick={(e) => {
             e.stopPropagation()
             onPrev()
           }}
           aria-label="Previous photo"
         >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
       )}
 
       {onNext && (
         <button
-          className="absolute right-4 z-10 rounded-lg border border-white/20 p-3 text-white transition-colors hover:border-white/60"
+          type="button"
+          className="absolute right-2 z-10 inline-flex h-11 w-11 items-center justify-center text-paper/80 transition-colors hover:text-paper sm:right-4"
           onClick={(e) => {
             e.stopPropagation()
             onNext()
           }}
           aria-label="Next photo"
         >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 5l7 7-7 7" />
           </svg>
         </button>
       )}
 
-      <div className="flex w-full flex-col items-center px-16 sm:px-24" onClick={(e) => e.stopPropagation()}>
-        <div className="relative w-full max-w-5xl overflow-hidden rounded-xl" style={{ height: '80vh' }}>
+      <div className="flex w-full flex-col items-center px-14 sm:px-24" onClick={(e) => e.stopPropagation()}>
+        <div className="relative w-full max-w-5xl" style={{ height: '78vh' }}>
           <Image src={photo.src} alt={photo.alt} fill className="object-contain" sizes="100vw" priority />
         </div>
-        {photo.caption && <p className="mt-5 text-center text-sm font-medium text-white/80">{photo.caption}</p>}
+        {photo.caption && <p className="mt-4 text-center text-meta text-paper/80">{photo.caption}</p>}
       </div>
     </div>
   )

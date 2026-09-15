@@ -24,28 +24,12 @@ const config: Config = {
         rule: 'var(--rule)',
         marker: 'var(--marker)',
         focus: 'var(--focus)',
-
-        // Legacy aliases mapped onto the new palette. They keep the untouched
-        // sections coherent between phases and are removed in Phase 3.
-        bg: 'var(--paper)',
-        surface: 'var(--paper)',
-        'surface-alt': 'var(--paper)',
-        fg: 'var(--ink)',
-        border: 'var(--rule)',
-        accent: {
-          DEFAULT: 'var(--ink)',
-          hover: 'var(--muted)',
-          link: 'var(--ink)',
-          weak: 'var(--rule)',
-        },
       },
       fontFamily: {
         // Newsreader carries headlines and body copy; Schibsted Grotesk is
         // reserved for interface text: nav, dates, tags, buttons, rail labels.
         serif: ['var(--font-serif)', 'Georgia', 'Times New Roman', 'serif'],
         sans: ['var(--font-sans)', 'system-ui', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        // Legacy alias, removed in Phase 3.
-        display: ['var(--font-serif)', 'Georgia', 'serif'],
       },
       fontSize: {
         // Major-third scale on an 18px base. Serif sizes get a touch more
@@ -57,26 +41,16 @@ const config: Config = {
         h3: ['1.75rem', { lineHeight: '1.25', letterSpacing: '-0.005em' }], // 28px, serif
         h2: ['2.25rem', { lineHeight: '1.15', letterSpacing: '-0.01em' }], // 36px, serif
         display: ['clamp(2.5rem, 6vw, 4.25rem)', { lineHeight: '1.05', letterSpacing: '-0.015em' }],
-        // Legacy alias, removed in Phase 3.
-        eyebrow: ['0.8125rem', { lineHeight: '1.45' }],
       },
       maxWidth: {
         page: '72rem',
         measure: '68ch',
       },
       spacing: {
-        rail: '12rem',
+        rail: '14rem',
       },
       transitionTimingFunction: {
         out: 'cubic-bezier(0.22, 1, 0.36, 1)',
-      },
-      // Legacy: the current project card's expand/collapse. Removed in Phase 3.
-      gridTemplateRows: {
-        collapse: '0fr',
-        expand: '1fr',
-      },
-      transitionProperty: {
-        rows: 'grid-template-rows',
       },
     },
   },

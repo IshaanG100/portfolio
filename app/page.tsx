@@ -1,6 +1,4 @@
 import Navbar from '@/components/Navbar'
-import ScrollProgress from '@/components/ScrollProgress'
-import BackToTop from '@/components/BackToTop'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Experience from '@/components/Experience'
@@ -9,11 +7,11 @@ import Skills from '@/components/Skills'
 import Education from '@/components/Education'
 import PhotoGallery from '@/components/PhotoGallery'
 import Contact from '@/components/Contact'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
     <>
-      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />
@@ -25,7 +23,7 @@ export default function Home() {
         <PhotoGallery />
         <Contact />
       </main>
-      <BackToTop />
+      <Footer />
     </>
   )
 }
