@@ -35,6 +35,11 @@ export const metadata: Metadata = {
     locale: 'en_CA',
     type: 'website',
   },
+  twitter: {
+    card: 'summary',
+    title: 'Ishaan Singh Gill: Turning business problems into shipped product',
+    description: 'Computer Science and Commerce at UBC Sauder, aiming for product management.',
+  },
 }
 
 // Sets the theme class before paint to avoid a flash. A stored choice wins;

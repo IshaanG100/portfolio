@@ -10,17 +10,17 @@ export default function Hero() {
       <div className="mx-auto max-w-page">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-20">
           <div>
-            <h1 className="max-w-[22ch] font-serif text-display font-medium text-ink">
+            <h1 style={{ '--i': 0 } as React.CSSProperties} className="rise max-w-[22ch] font-serif text-display font-medium text-ink">
               Product-minded, between business and engineering
             </h1>
-            <p className="mt-8 max-w-measure font-serif text-lead text-ink">
+            <p style={{ '--i': 1 } as React.CSSProperties} className="rise mt-8 max-w-measure font-serif text-lead text-ink">
               I study Computer Science and Commerce at UBC Sauder, and I work best in the
               space between them, turning a business problem into something engineered and
               shipped. I&apos;m aiming for{' '}
               <span className="font-semibold">product management</span>: deciding what to
               build, what to leave out, and why.
             </p>
-            <div className="ui mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <div style={{ '--i': 2 } as React.CSSProperties} className="rise ui mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
               <a
                 href="/Ishaan_Gill_Resume.pdf"
                 download
@@ -39,7 +39,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <aside className="flex gap-6 lg:flex-col lg:gap-7">
+          <aside style={{ '--i': 3 } as React.CSSProperties} className="rise flex gap-6 lg:flex-col lg:gap-7">
             <div className="relative aspect-[4/5] w-28 shrink-0 overflow-hidden sm:w-36 lg:w-full">
               <Image
                 src="/photos/hero.jpeg"

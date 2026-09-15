@@ -65,15 +65,56 @@
     font-size: 0.9375rem;
     line-height: 1.45;
   }
+
+  /* The photo lightbox is always the dark palette, whichever theme is on,
+     so the utilities inside it resolve against these values. */
+  .lightbox {
+    --paper: rgba(15, 22, 38, 0.96);
+    --ink: #ece9e1;
+    --muted: #b3b9c4;
+    --focus: #f0c84a;
+    backdrop-filter: blur(6px);
+  }
 }
 
 /* The highlighter band. box-decoration-break keeps the padding on every
-   line fragment when a highlighted sentence wraps. */
+   line fragment when a highlighted sentence wraps; the gradient background
+   is what lets the band wipe in from the left. */
 .marker {
-  background-color: var(--marker);
   color: var(--ink);
+  background-color: transparent;
+  background-image: linear-gradient(var(--marker), var(--marker));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   padding: 0.08em 0.25em;
   margin: 0 -0.25em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The one device: the highlighter wipes across once on first sight. */
+  .marker {
+    background-size: 0% 100%;
+    transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .marker.is-on {
+    background-size: 100% 100%;
+  }
+
+  /* The one moment: the hero rises in on load, one element after another. */
+  .rise {
+    animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
