@@ -39,7 +39,7 @@ export default function Hero() {
               <a
                 href="/Ishaan_Gill_Resume.pdf"
                 download
-                className="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3 font-medium text-white transition-colors hover:bg-accent-hover"
+                className="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3 font-medium text-paper transition-colors hover:bg-accent-hover"
               >
                 Download Resume
               </a>

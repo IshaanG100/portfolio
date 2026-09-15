@@ -75,7 +75,7 @@ export default function Navbar() {
             <a
               href="/Ishaan_Gill_Resume.pdf"
               download
-              className="hidden rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover md:inline-flex"
+              className="hidden rounded-lg bg-accent px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-accent-hover md:inline-flex"
             >
               Resume
             </a>

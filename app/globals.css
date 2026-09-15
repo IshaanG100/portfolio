@@ -4,57 +4,71 @@
 
 @layer base {
   :root {
-    /* Light mode (primary) — evergreen accent on soft cool gray */
-    --bg: #f3f4f6; /* soft cool gray page */
-    --surface: #ffffff; /* white cards, lifted off the page */
-    --surface-alt: #edeef1; /* chips / subtle bands */
-    --text: #18191a; /* 16.00:1 on bg */
-    --muted: #6a6c6b; /* 4.81:1 on bg */
-    --border: #e2e4e7;
-    --accent: #1f6b4c; /* CTA fill — white label 6.43:1 */
-    --accent-hover: #166534; /* CTA hover — white label 7.13:1 */
-    --accent-link: #1f6b4c; /* links / kickers / small accent text — 5.84:1 on bg, 6.43:1 on white */
-    --accent-weak: #bfd8c9; /* subtle accent borders / rules */
+    /* Light: navy ink on warm paper. Contrast checked against paper unless noted. */
+    --paper: #faf9f5;
+    --ink: #141c2e; /* 16.1:1 */
+    --muted: #5c6473; /* 5.7:1 */
+    --rule: #d9d6ce; /* decorative hairline */
+    --marker: #ffe45c; /* ink on marker 13.4:1 */
+    --focus: #7a5a00; /* 6.1:1 */
+    color-scheme: light;
   }
 
   .dark {
-    /* Dark mode — verified against the dark ground */
-    --bg: #141615;
-    --surface: #1c1f1d;
-    --surface-alt: #22251f;
-    --text: #ededeb; /* 15.51:1 on bg, 14.18:1 on surface */
-    --muted: #9b9e9b; /* 6.71:1 on bg, 6.14:1 on surface */
-    --border: #2e322e;
-    --accent: #1e7a54; /* CTA fill — white label 5.29:1 */
-    --accent-hover: #1b6e4a; /* CTA hover (darker) — white label 6.22:1 */
-    --accent-link: #5fb58a; /* links / labels — 7.33:1 bg, 6.70:1 surface */
-    --accent-weak: #2f5a42; /* subtle accent borders */
+    /* Dark: paper on ink. Contrast checked against the dark ground unless noted. */
+    --paper: #0f1626;
+    --ink: #ece9e1; /* 14.9:1 */
+    --muted: #9aa2b1; /* 7.0:1 */
+    --rule: #283044;
+    --marker: #4a3b0c; /* ink on marker 9.0:1 */
+    --focus: #f0c84a; /* 11.2:1 */
+    color-scheme: dark;
   }
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
-    background-color: var(--bg);
-    color: var(--text);
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-serif), Georgia, 'Times New Roman', serif;
+    font-size: 1.125rem;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-optical-sizing: auto;
   }
 
   ::selection {
-    background: var(--accent);
-    color: #fff;
+    background: var(--marker);
+    color: var(--ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent-link);
-    outline-offset: 2px;
-    border-radius: 2px;
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
   }
 }
 
-/* Experience ascent: staircase offsets apply from sm upward, flat on mobile */
+@layer components {
+  /* Interface text: everything that is not headline or reading copy. */
+  .ui {
+    font-family: var(--font-sans), system-ui, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+}
+
+/* Experience ascent: staircase offsets apply from sm upward, flat on mobile.
+   Legacy, removed in Phase 3 when the experience list is rebuilt. */
 .exp-step {
   width: 100%;
 }
@@ -65,13 +79,12 @@
   }
 }
 
-/* Scroll-reveal: disabled entirely for reduced-motion (content just shows) */
+/* Scroll-reveal: legacy, removed in Phase 4. Disabled for reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.6s ease, transform 0.6s ease;
-    will-change: opacity, transform;
   }
   .reveal.is-visible {
     opacity: 1;

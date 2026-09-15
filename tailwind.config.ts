@@ -1,5 +1,13 @@
 import type { Config } from 'tailwindcss'
 
+/**
+ * Design tokens for the "annotated memo" direction.
+ *
+ * Colors are CSS variables (light on :root, dark on .dark) so the theme can be
+ * switched with a single class. Six roles only: paper (ground), ink (text and
+ * fills), muted (secondary text), rule (hairlines), marker (highlighter band),
+ * focus (keyboard ring). There is no chromatic accent beyond the marker.
+ */
 const config: Config = {
   darkMode: 'class',
   content: [
@@ -10,54 +18,65 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: 'var(--bg)',
-        surface: 'var(--surface)',
-        'surface-alt': 'var(--surface-alt)',
-        fg: 'var(--text)',
+        paper: 'var(--paper)',
+        ink: 'var(--ink)',
         muted: 'var(--muted)',
-        border: 'var(--border)',
+        rule: 'var(--rule)',
+        marker: 'var(--marker)',
+        focus: 'var(--focus)',
+
+        // Legacy aliases mapped onto the new palette. They keep the untouched
+        // sections coherent between phases and are removed in Phase 3.
+        bg: 'var(--paper)',
+        surface: 'var(--paper)',
+        'surface-alt': 'var(--paper)',
+        fg: 'var(--ink)',
+        border: 'var(--rule)',
         accent: {
-          DEFAULT: 'var(--accent)',
-          hover: 'var(--accent-hover)',
-          link: 'var(--accent-link)',
-          weak: 'var(--accent-weak)',
+          DEFAULT: 'var(--ink)',
+          hover: 'var(--muted)',
+          link: 'var(--ink)',
+          weak: 'var(--rule)',
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        // Newsreader carries headlines and body copy; Schibsted Grotesk is
+        // reserved for interface text: nav, dates, tags, buttons, rail labels.
+        serif: ['var(--font-serif)', 'Georgia', 'Times New Roman', 'serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        // Legacy alias, removed in Phase 3.
+        display: ['var(--font-serif)', 'Georgia', 'serif'],
       },
       fontSize: {
-        // Space Grotesk display headings, tracking tightened.
-        display: ['clamp(2.75rem, 7vw, 4.5rem)', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
-        h2: ['clamp(1.9rem, 4vw, 2.6rem)', { lineHeight: '1.12', letterSpacing: '-0.02em' }],
-        // Sans headings / labels
-        h3: ['1.1875rem', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
-        lead: ['1.125rem', { lineHeight: '1.65' }],
-        eyebrow: ['0.75rem', { lineHeight: '1', letterSpacing: '0.08em' }],
+        // Major-third scale on an 18px base. Serif sizes get a touch more
+        // line-height than the sans interface sizes.
+        meta: ['0.8125rem', { lineHeight: '1.45' }], // 13px, sans
+        ui: ['0.9375rem', { lineHeight: '1.45' }], // 15px, sans
+        body: ['1.125rem', { lineHeight: '1.55' }], // 18px, serif
+        lead: ['1.375rem', { lineHeight: '1.45' }], // 22px, serif
+        h3: ['1.75rem', { lineHeight: '1.25', letterSpacing: '-0.005em' }], // 28px, serif
+        h2: ['2.25rem', { lineHeight: '1.15', letterSpacing: '-0.01em' }], // 36px, serif
+        display: ['clamp(2.5rem, 6vw, 4.25rem)', { lineHeight: '1.05', letterSpacing: '-0.015em' }],
+        // Legacy alias, removed in Phase 3.
+        eyebrow: ['0.8125rem', { lineHeight: '1.45' }],
       },
       maxWidth: {
-        content: '64rem',
-        reading: '42rem',
+        page: '72rem',
+        measure: '68ch',
       },
-      boxShadow: {
-        card: '0 1px 2px rgba(17, 18, 20, 0.04), 0 6px 20px rgba(17, 18, 20, 0.06)',
+      spacing: {
+        rail: '12rem',
       },
+      transitionTimingFunction: {
+        out: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
+      // Legacy: the current project card's expand/collapse. Removed in Phase 3.
       gridTemplateRows: {
         collapse: '0fr',
         expand: '1fr',
       },
       transitionProperty: {
         rows: 'grid-template-rows',
-      },
-      keyframes: {
-        caret: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0' },
-        },
-      },
-      animation: {
-        caret: 'caret 1s step-end infinite',
       },
     },
   },

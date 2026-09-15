@@ -1,26 +1,34 @@
 import type { Metadata } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Newsreader, Schibsted_Grotesk } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({
+// Newsreader carries headlines and body copy. The optical-size axis lets the
+// same family read as a text face at 18px and a display face at 68px.
+const newsreader = Newsreader({
   subsets: ['latin'],
-  variable: '--font-inter',
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
+  // Next has no size-adjust metrics for Newsreader, so the automatic fallback
+  // override is disabled; the serif stack below covers the swap window.
+  adjustFontFallback: false,
+  variable: '--font-serif',
   display: 'swap',
 })
 
-const spaceGrotesk = Space_Grotesk({
+// Schibsted Grotesk is reserved for interface text.
+const schibsted = Schibsted_Grotesk({
   subsets: ['latin'],
-  variable: '--font-display',
+  variable: '--font-sans',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: 'Ishaan Singh Gill · Product-Minded BUCS Student at UBC',
+  title: 'Ishaan Singh Gill: Turning business problems into shipped product',
   description:
-    'Ishaan Singh Gill: Computer Science and Commerce at UBC Sauder, aiming for product management.',
+    'Ishaan Singh Gill: Computer Science and Commerce at UBC Sauder, aiming for product management. Turning business problems into shipped product.',
   metadataBase: new URL('https://ishaangill.com'),
   openGraph: {
-    title: 'Ishaan Singh Gill · Product-Minded BUCS Student at UBC',
+    title: 'Ishaan Singh Gill: Turning business problems into shipped product',
     description: 'Computer Science and Commerce at UBC Sauder, aiming for product management.',
     url: 'https://ishaangill.com',
     siteName: 'Ishaan Singh Gill',
@@ -29,12 +37,13 @@ export const metadata: Metadata = {
   },
 }
 
-// Sets the theme class before paint to avoid a flash. Defaults to light.
-const themeScript = `(function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.classList.add('dark')}}catch(e){}})()`
+// Sets the theme class before paint to avoid a flash. A stored choice wins;
+// otherwise the system preference decides.
+const themeScript = `(function(){try{var s=localStorage.getItem('theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d){document.documentElement.classList.add('dark')}}catch(e){}})()`
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${newsreader.variable} ${schibsted.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

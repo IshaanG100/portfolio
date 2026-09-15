@@ -15,7 +15,7 @@ export default function Contact() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               href="mailto:Ishaansgill@icloud.com"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-white transition-colors hover:bg-accent-hover"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-paper transition-colors hover:bg-accent-hover"
             >
               <EmailIcon />
               Email me
